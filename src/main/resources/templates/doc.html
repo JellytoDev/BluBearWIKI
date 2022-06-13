@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- core -->
+    <script src="../static/libs/jquery/jquery.min.js"></script>
+    <script src="../static/libs/angularjs/angular.min.js"></script>
+
+    <!-- libs -->
+    <script src="../static/libs/chartjs/chart.min.js"></script>
+    <script src="../static/libs/ckeditor5/ballonblock/ckeditor.js"></script>
+    <script src="../static/libs/toastr/toastr.min.js"></script>
+    <script src="../static/libs/showdown/showdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- css core -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/libs/tabler/Tabler/dist/css/tabler.min.css">
+    <link rel="stylesheet" href="../static/libs/tabler/Tabler/dist/css/tabler-flags.min.css">
+    <link rel="stylesheet" href="../static/libs/tabler/Tabler/dist/css/tabler-payments.min.css">
+    <link rel="stylesheet" href="../static/libs/tabler/Tabler/dist/css/tabler-vendors.min.css">
+    <link rel="stylesheet" href="../static/libs/tabler/Tabler/dist/css/demo.min.css">
+
+    <link rel="stylesheet" href="../static/libs/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="../static/libs/toastr/toastr.min.css">
+</head>
+<body>
+<header class="navbar navbar-expand-md navbar-light d-print-none">
+    <div class="container-xl">
+        <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+
+        </h1>
+        <div class="navbar-nav flex-row order-md-last">
+            <div class="nav-item d-none d-md-flex me-3">
+                <div class="btn-list">
+                    <a href="https://github.com/sponsors/codecalm" class="p-1" target="_blank" rel="noreferrer">
+                        새문서
+                    </a>
+                    <a href="https://github.com/tabler/tabler" class="p-1" target="_blank" rel="noreferrer">
+                        전체 문서
+                    </a>
+                    <a href="https://github.com/sponsors/codecalm" class="p-1" target="_blank" rel="noreferrer">
+                        설정
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+    <div class="page-wrapper">
+        <div class="page-body">
+<!--    d-xl-block    -->
+
+            <div class="container-xl">
+                <div class="row gx-lg-5 p-0" style="position:relative;">
+                    <div class="d-none d-lg-block col-xl-2 col-lg-3 p-0">
+                        <div class="inner-area py-4 w-100">
+                            <div class="text-center mb-2"><a href="/w/dizest_tutorial"><img src="https://picsum.photos/200/100" style="width: 140px;" class="m-1 mt-0 mb-0"></a>
+                            </div>
+                            <h2 style="font-size: 18px;" class="text-center"><a href="/w/dizest_tutorial" class="text-dark">Title</a>
+                            </h2>
+                            <input placeholder="문서 검색" ng-model="keyword" ng-change="search(keyword)" ng-enter="search(keyword, true);" class="form-control form-control-rounded text-center ng-pristine ng-untouched ng-valid ng-empty">
+                        </div>
+
+                        <ul class="nav nav-pills nav-vertical">
+                            <li class="nav-item">
+                                <a href="../docs/" class="nav-link active">
+                                    Introduction
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#menu-base" class="nav-link" data-bs-toggle="collapse" aria-expanded="true">
+                                    Getting started
+                                    <span class="nav-link-toggle"></span>
+                                </a>
+                                <ul class="nav nav-pills collapse show" id="menu-base" style="">
+                                    <li class="nav-item">
+                                        <a href="../docs/getting-started.html" class="nav-link">
+                                            Getting Started
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="../docs/download.html" class="nav-link">
+                                            Download
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="../docs/browser-support.html" class="nav-link">
+                                            Browser Support
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="../changelog.html" class="nav-link">
+                                    Changelog
+                                    <span class="badge bg-blue-lt ms-auto">1.0.0-beta10</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-xl-8 col-lg-9">
+                        <div class="card card-lg">
+                            <div class="card-body">
+                                <div class="markdown">
+
+                                    <div>
+                                        <div class="d-flex mb-3">
+                                            <h1 class="m-0">Introduction</h1>
+                                        </div>
+                                    </div>
+                                    <p>Tabler is a UI kit that speeds up the development process and makes it easier than ever! Built on the latest version of Bootstrap, it helps you create templates based on fully customizable and ready-to-use UI components, which can be used by both simple websites and sophisticated systems. With basic knowledge of HTML and CSS, you’ll be able to create dashboards that are fully functional and beautifully designed!</p>
+                                    <div class="mt-4">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <h3>Getting started</h3>
+                                                <ul class="list-unstyled">
+                                                    <li>
+                                                        - <a href="../docs/getting-started.html">Getting Started</a>
+                                                    </li>
+                                                    <li>
+                                                        - <a href="../docs/download.html">Download</a>
+                                                    </li>
+                                                    <li>
+                                                        - <a href="../docs/browser-support.html">Browser Support</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-none d-xl-block card col-xl-2">
+                        <div ng-if="data.nav.length > 0" class="content-box mt-4 ng-scope">
+                            <h3 class="content-head">목차</h3>
+                            <!-- ngRepeat: (idx, item) in data.nav track by $index --><div ng-repeat="(idx, item) in data.nav track by $index" class="item ng-scope"><a href="#wiki-point-1" class="blue ng-binding">1. </a><span ng-bind-html="markdown(item)" class="ng-binding">6/2</span>
+                        </div><!-- end ngRepeat: (idx, item) in data.nav track by $index --><div ng-repeat="(idx, item) in data.nav track by $index" class="item ng-scope"><a href="#wiki-point-2" class="blue ng-binding">2. </a><span ng-bind-html="markdown(item)" class="ng-binding">6/3</span>
+                        </div><!-- end ngRepeat: (idx, item) in data.nav track by $index --><div ng-repeat="(idx, item) in data.nav track by $index" class="item ng-scope"><a href="#wiki-point-3" class="blue ng-binding">3. </a><span ng-bind-html="markdown(item)" class="ng-binding">6/7</span>
+                        </div><!-- end ngRepeat: (idx, item) in data.nav track by $index --><div ng-repeat="(idx, item) in data.nav track by $index" class="item ng-scope"><a href="#wiki-point-4" class="blue ng-binding">4. </a><span ng-bind-html="markdown(item)" class="ng-binding">6/8</span>
+                        </div><!-- end ngRepeat: (idx, item) in data.nav track by $index -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer footer-transparent d-print-none">
+            <div class="container-xl">
+                <div class="row text-center align-items-center flex-row-reverse">
+                    <div class="col-lg-auto ms-lg-auto">
+                        <ul class="list-inline list-inline-dots mb-0">
+                            <li class="list-inline-item"><a href="../docs/index.html" class="link-secondary">Documentation</a></li>
+                            <li class="list-inline-item"><a href="../license.html" class="link-secondary">License</a></li>
+                            <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
+                            <li class="list-inline-item">
+                                <a href="https://github.com/sponsors/codecalm" target="_blank" class="link-secondary" rel="noopener">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-pink icon-filled icon-inline" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><desc>Download more icon variants from https://tabler-icons.io/i/heart</desc><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path></svg>
+                                    Sponsor
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+                        <ul class="list-inline list-inline-dots mb-0">
+                            <li class="list-inline-item">
+                                Copyright © 2022
+                                <a href=".." class="link-secondary">Tabler</a>.
+                                All rights reserved.
+                            </li>
+                            <li class="list-inline-item">
+                                Generated 2022-06-09 20:45 UTC
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

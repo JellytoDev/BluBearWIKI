@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- core -->
+    <script src="../static/libs/jquery/jquery.min.js"></script>
+    <script src="../static/libs/angularjs/angular.min.js"></script>
+
+    <!-- libs -->
+    <script src="../static/libs/chartjs/chart.min.js"></script>
+    <script src="../static/libs/ckeditor5/ballonblock/ckeditor.js"></script>
+    <script src="../static/libs/toastr/toastr.min.js"></script>
+    <script src="../static/libs/showdown/showdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- css core -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/libs/tabler/Tabler/dist/css/tabler.min.css">
+    <link rel="stylesheet" href="../static/libs/tabler/Tabler/dist/css/tabler-flags.min.css">
+    <link rel="stylesheet" href="../static/libs/tabler/Tabler/dist/css/tabler-payments.min.css">
+    <link rel="stylesheet" href="../static/libs/tabler/Tabler/dist/css/tabler-vendors.min.css">
+    <link rel="stylesheet" href="../static/libs/tabler/Tabler/dist/css/demo.min.css">
+
+    <link rel="stylesheet" href="../static/libs/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="../static/libs/toastr/toastr.min.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="page-body">
+            <div class="container-xl">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        WIKI 기본 설정
+                    </div>
+                    <div class="card-body">
+                        <div class="row p-4">
+                            <div class="mb-4 col-sm-6">
+                                <label class="form-label">Title</label>
+                                <input type="text" class="form-control rounded-3" name="example-text-input" placeholder="제목 입력">
+                            </div>
+                            <div class="mb-4 col-sm-3">
+                                <label class="form-label">Category</label>
+                                <select class="form-select">
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="mb-4 col-sm-3">
+                                <label class="form-label">Access</label>
+                                <select class="form-select">
+                                    <option value="1">Public</option>
+                                    <option value="2">Internal</option>
+                                    <option value="3">Private</option>
+                                </select>
+                            </div>
+                            <div class="mb-4 col-sm-9">
+                                <div class="form-label">Logo</div>
+                                <input type="file" class="form-control">
+                            </div>
+                            <div class="mb-3 col-sm-12">
+                                <label class="form-label">Description
+                                    <span class="form-label-description">56/100</span>
+                                </label>
+                                <textarea class="form-control" name="example-textarea-input" rows="6" placeholder="설명 입력 (최대 100자)" style="height: 122px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        권한 설정
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 p-3">
+                                <label class="form-label">사용자 선택</label>
+                                <select ui-select2="config.select2" ng-model="data.newuser.id" class="form-select ng-pristine ng-untouched ng-valid ng-empty select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                    <option value="" data-select2-id="3" selected="selected"></option>
+                                    <!-- ngRepeat: item in data.users --><option ng-repeat="item in data.users" value="imgcom" class="ng-binding ng-scope" data-select2-id="5">고민균 (imgcom@season.co.kr)</option><!-- end ngRepeat: item in data.users --><option ng-repeat="item in data.users" value="stella" class="ng-binding ng-scope" data-select2-id="6">김연호 (stella@season.co.kr)</option><!-- end ngRepeat: item in data.users --><option ng-repeat="item in data.users" value="seheedarong" class="ng-binding ng-scope" data-select2-id="7">박세희 (seheedarong@season.co.kr)</option><!-- end ngRepeat: item in data.users --><option ng-repeat="item in data.users" value="daek29" class="ng-binding ng-scope" data-select2-id="8">이대겸 (daek29@season.co.kr)</option><!-- end ngRepeat: item in data.users --><option ng-repeat="item in data.users" value="jangye" class="ng-binding ng-scope" data-select2-id="9">장예은 (jangye@season.co.kr)</option><!-- end ngRepeat: item in data.users --><option ng-repeat="item in data.users" value="jeongcr" class="ng-binding ng-scope" data-select2-id="10">정초롱 (jeongcr@season.co.kr)</option><!-- end ngRepeat: item in data.users --><option ng-repeat="item in data.users" value="cghgus93" class="ng-binding ng-scope" data-select2-id="11">조호현 (cghgus93@season.co.kr)</option><!-- end ngRepeat: item in data.users --><option ng-repeat="item in data.users" value="chaejh" class="ng-binding ng-scope" data-select2-id="12">채정훈 (chaejh@season.co.kr)</option><!-- end ngRepeat: item in data.users --><option ng-repeat="item in data.users" value="baffle77" class="ng-binding ng-scope" data-select2-id="13">최혜원 (baffle77@season.co.kr)</option><!-- end ngRepeat: item in data.users -->
+                                </select><span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" data-select2-id="2" style="width: 255.328px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-214e-container"><span class="select2-selection__rendered" id="select2-214e-container" role="textbox" aria-readonly="true"></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                            <div class="col-md-2 p-3">
+                                <label class="form-label">권한</label>
+                                <select ng-model="data.newuser.role" class="form-select ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <option value="owner">Owner</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="editor">Editor</option>
+                                    <option value="guest" selected="selected">Guest</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 p-3">
+                                <label class="form-label">만료일</label>
+                                <div class="input-group">
+                                    <input type="date" ng-model="data.newuser.expired" class="form-control ng-pristine ng-untouched ng-valid ng-empty">
+                                    <!-- ngIf: data.newuser.expired -->
+                                </div>
+                            </div>
+                            <div class="col-md-2 p-3">
+                                <label class="form-label">&nbsp;</label>
+                                <button ng-click="member.update(data.newuser)" class="btn btn-primary btn-block">추가</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive mb-0">
+                            <table class="table card-table table-vcenter table-hover">
+                                <thead>
+                                <tr>
+                                    <th>구성원</th>
+                                    <th class="w-1">참가일</th>
+                                    <th class="w-1">만료일</th>
+                                    <th class="w-1">권한</th>
+                                    <th class="w-1">만료설정</th>
+                                    <th class="w-1">설정</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!-- ngRepeat: item in member.data --><tr ng-repeat="item in member.data" class="ng-scope">
+                                    <td class="text-left ng-binding">정종현<!-- ngIf: item.id == me --><span ng-if="item.id == me" class="badge bg-green-lt ml-1 ng-scope">It's you</span><!-- end ngIf: item.id == me --><br><span class="text-muted ng-binding">jelly@season.co.kr</span>
+                                    </td>
+                                    <td class="w-1 ng-binding">2022-03-08</td>
+                                    <td class="w-1 ng-binding">만료일 없음</td>
+                                    <td class="w-1">
+                                        <!-- ngIf: item.id != me && !(project_role != 'owner' && item.role =='owner') --><!-- ngIf: item.id == me --><span ng-if="item.id == me" class="badge bg-dark ng-binding ng-scope">owner</span><!-- end ngIf: item.id == me --><!-- ngIf: item.id != me && (project_role != 'owner' && item.role =='owner') -->
+                                    </td>
+                                    <td class="w-1">
+                                        <div style="width: 210px;" class="input-group">
+                                            <!-- ngIf: item.id != me -->
+                                            <!-- ngIf: item.expired -->
+                                        </div>
+                                    </td>
+                                    <td class="w-1"><!-- ngIf: item.id != me -->
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="item in member.data" class="ng-scope">
+                                    <td class="text-left ng-binding">권태욱<!-- ngIf: item.id == me --><br><span class="text-muted ng-binding">kwon3286@season.co.kr</span>
+                                    </td>
+                                    <td class="w-1 ng-binding">2022-03-08</td>
+                                    <td class="w-1 ng-binding">만료일 없음</td>
+                                    <td class="w-1">
+                                        <!-- ngIf: item.id != me && !(project_role != 'owner' && item.role =='owner') --><select style="width: 120px;" ng-model="item.role" ng-if="item.id != me &amp;&amp; !(project_role != 'owner' &amp;&amp; item.role =='owner')" ng-change="member.update(item)" class="form-select text-center ng-pristine ng-valid ng-scope ng-not-empty ng-touched">
+                                        <option value="owner">Owner</option>
+                                        <option value="admin" selected="selected">Admin</option>
+                                        <option value="editor">Editor</option>
+                                        <option value="guest">Guest</option>
+                                    </select><!-- end ngIf: item.id != me && !(project_role != 'owner' && item.role =='owner') --><!-- ngIf: item.id == me --><!-- ngIf: item.id != me && (project_role != 'owner' && item.role =='owner') -->
+                                    </td>
+                                    <td class="w-1">
+                                        <div style="width: 210px;" class="input-group">
+                                            <!-- ngIf: item.id != me --><input type="date" ng-model="item.expired" ng-if="item.id != me" ng-change="member.update(item)" class="form-control ng-pristine ng-untouched ng-valid ng-scope ng-empty"><!-- end ngIf: item.id != me -->
+                                            <!-- ngIf: item.expired -->
+                                        </div>
+                                    </td>
+                                    <td class="w-1"><!-- ngIf: item.id != me --><a ng-if="item.id != me" ng-click="member.delete(item)" class="btn btn-danger ng-scope"><i class="fas fa-trash"></i></a><!-- end ngIf: item.id != me -->
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
