@@ -25,30 +25,70 @@
 
     <link rel="stylesheet" href="../static/libs/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="../static/libs/toastr/toastr.min.css">
+
+    <script>
+        const container = angular.module("container-main", []);
+
+        container.controller("container-controller", async ($scope,$timeout)=> {
+
+            /*
+            *
+            *
+            * 기능
+            * 문서 수정, 삭제, 설정, 검색
+            * 위키 설정 바로가기 , ctrl + s 할때마다 저장,ballon ckeditor, 문서간 이동
+            *
+            * */
+
+            $scope.doc = {};
+            $scope.doc.edit = async ()=>{
+
+            }
+
+            $scope.doc.set = async ()=>{
+
+            }
+
+            $scope.doc.delete = async ()=>{
+
+            }
+
+            $scope.doc.search = async ()=>{
+
+            }
+
+            $scope.doc.move = async () => {
+
+            }
+
+            console.log("Hello worlds : ");
+        })
+    </script>
 </head>
 <body>
-<header class="navbar navbar-expand-md navbar-light d-print-none">
-    <div class="container-xl">
-        <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+<div class="container-main" ng-app="container-main" ng-controller="container-controller">
+    <header class="navbar navbar-expand-md navbar-light d-print-none">
+        <div class="container-xl">
+            <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
 
-        </h1>
-        <div class="navbar-nav flex-row order-md-last">
-            <div class="nav-item d-none d-md-flex me-3">
-                <div class="btn-list">
-                    <a href="https://github.com/sponsors/codecalm" class="p-1" target="_blank" rel="noreferrer">
-                        새문서
-                    </a>
-                    <a href="https://github.com/tabler/tabler" class="p-1" target="_blank" rel="noreferrer">
-                        전체 문서
-                    </a>
-                    <a href="https://github.com/sponsors/codecalm" class="p-1" target="_blank" rel="noreferrer">
-                        설정
-                    </a>
+            </h1>
+            <div class="navbar-nav flex-row order-md-last">
+                <div class="nav-item d-none d-md-flex me-3">
+                    <div class="btn-list">
+                        <a href="https://github.com/sponsors/codecalm" class="p-1" target="_blank" rel="noreferrer">
+                            새문서
+                        </a>
+                        <a href="https://github.com/tabler/tabler" class="p-1" target="_blank" rel="noreferrer">
+                            전체 문서
+                        </a>
+                        <a href="https://github.com/sponsors/codecalm" class="p-1" target="_blank" rel="noreferrer">
+                            위키 설정
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
     <div class="page-wrapper">
         <div class="page-body">
 <!--    d-xl-block    -->
@@ -103,8 +143,59 @@
                         </ul>
                     </div>
 
+                    <!-- Modal -->
+                    <div class="modal fade" id="doc-set-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-4">
+                                        <label class="form-label">Title</label>
+                                        <input type="text" class="form-control rounded-3" name="example-text-input" placeholder="제목 입력">
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="form-label">문서 카테고리</div>
+                                        <select class="form-select">
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="form-label">문서 View 설정</div>
+                                        <label class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" checked="">
+                                            <span class="form-check-label">문서 옆에 보이기</span>
+                                        </label>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                    <button type="button" class="btn btn-primary">저장</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-xl-8 col-lg-9">
+
                         <div class="card card-lg">
+                            <div class="card-header ms-auto">
+                                <a class="nav-link btn btn-light mx-1" href="#">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a class="nav-link btn btn-light mx-1" href="#">
+                                    <i class="fa-solid fa-gear" data-bs-toggle="modal" data-bs-target="#doc-set-modal"></i>
+                                </a>
+                                <a class="nav-link btn btn-light mx-1" href="#">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </div>
+
                             <div class="card-body">
                                 <div class="markdown">
 
@@ -140,7 +231,8 @@
                     <div class="d-none d-xl-block card col-xl-2">
                         <div ng-if="data.nav.length > 0" class="content-box mt-4 ng-scope">
                             <h3 class="content-head">목차</h3>
-                            <!-- ngRepeat: (idx, item) in data.nav track by $index --><div ng-repeat="(idx, item) in data.nav track by $index" class="item ng-scope"><a href="#wiki-point-1" class="blue ng-binding">1. </a><span ng-bind-html="markdown(item)" class="ng-binding">6/2</span>
+                            <!-- ngRepeat: (idx, item) in data.nav track by $index --><div class="item ng-scope">
+                            <a href="#wiki-point-1" class="blue ng-binding">1. </a><span ng-bind-html="markdown(item)" class="ng-binding">6/2</span>
                         </div><!-- end ngRepeat: (idx, item) in data.nav track by $index --><div ng-repeat="(idx, item) in data.nav track by $index" class="item ng-scope"><a href="#wiki-point-2" class="blue ng-binding">2. </a><span ng-bind-html="markdown(item)" class="ng-binding">6/3</span>
                         </div><!-- end ngRepeat: (idx, item) in data.nav track by $index --><div ng-repeat="(idx, item) in data.nav track by $index" class="item ng-scope"><a href="#wiki-point-3" class="blue ng-binding">3. </a><span ng-bind-html="markdown(item)" class="ng-binding">6/7</span>
                         </div><!-- end ngRepeat: (idx, item) in data.nav track by $index --><div ng-repeat="(idx, item) in data.nav track by $index" class="item ng-scope"><a href="#wiki-point-4" class="blue ng-binding">4. </a><span ng-bind-html="markdown(item)" class="ng-binding">6/8</span>
@@ -183,5 +275,6 @@
             </div>
         </footer>
     </div>
+</div>
 </body>
 </html>
