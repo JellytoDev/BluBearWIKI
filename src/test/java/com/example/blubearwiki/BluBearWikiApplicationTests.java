@@ -1,13 +1,15 @@
 package com.example.blubearwiki;
 
+import com.example.blubearwiki.domain.wiki.WikiAccessType;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class BluBearWikiApplicationTests {
 
 	@Test
 	void contextLoads() {
+		WikiAccessType wikiAccessType;
+		System.out.println("wikiAccessType = " + WikiAccessType.OWNER);
 	}
 
 }
