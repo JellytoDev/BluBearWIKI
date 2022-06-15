@@ -1,12 +1,15 @@
 package com.example.blubearwiki;
 
+import com.example.blubearwiki.domain.doc.DocCategory;
 import com.example.blubearwiki.domain.member.Member;
 import com.example.blubearwiki.domain.wiki.WikiAccessType;
-import com.example.blubearwiki.repository.DocCategoryRepository;
-import com.example.blubearwiki.repository.MemberRepository;
+import com.example.blubearwiki.repository.doc.DocCategoryRepository;
+import com.example.blubearwiki.repository.member.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Optional;
 
 @SpringBootTest
 class BluBearWikiApplicationTests {
@@ -20,6 +23,9 @@ class BluBearWikiApplicationTests {
 	void contextLoads() {
 		memberRepository.save(new Member());
 		docCategoryRepository.findBySeqBetween(1, 20);
+
+		Optional<DocCategory> docCategory = Optional.empty();
+		System.out.println("docCategory = " + docCategory);
 
 		WikiAccessType wikiAccessType;
 		System.out.println("wikiAccessType = " + WikiAccessType.OWNER);

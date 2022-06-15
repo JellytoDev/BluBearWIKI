@@ -1,4 +1,4 @@
-package com.example.blubearwiki.repository;
+package com.example.blubearwiki.repository.doc;
 
 import com.example.blubearwiki.domain.doc.Doc;
 import com.example.blubearwiki.domain.doc.DocCategory;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface DocCategoryRepository extends JpaRepository<DocCategory, Long> {
@@ -18,4 +19,7 @@ public interface DocCategoryRepository extends JpaRepository<DocCategory, Long> 
 
     @Query(value = "select dc from DocCategory dc where dc.name in :names")
     DocCategory findByNames(ArrayList<String> names);
+
+    @Override
+    Optional<DocCategory> findById(Long aLong);
 }
