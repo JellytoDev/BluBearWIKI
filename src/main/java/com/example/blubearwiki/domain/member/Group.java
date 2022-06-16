@@ -24,5 +24,9 @@ public class Group {
     private Company company;
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.REMOVE)
-    List<Member> members;
+    List<Member> members = new ArrayList<>();
+
+    public void addMember(Member member) {
+        this.members.add(member);
+    }
 }

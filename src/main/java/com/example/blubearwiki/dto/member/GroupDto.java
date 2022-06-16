@@ -5,6 +5,7 @@ import com.example.blubearwiki.domain.member.Member;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -12,11 +13,16 @@ import java.util.List;
 public class GroupDto {
     private Long id;
     private String name;
-    private List<Member> members;
+    private List<MemberDto> members = new ArrayList<>();
 
     public void fromGroup(Group group) {
         this.id = group.getId();
         this.name = group.getName();
-        this.members = group.getMembers();
+
+        for (Member member : group.getMembers()) {
+            MemberDto memberDto = new MemberDto();
+            memberDto.fromMember(member);
+            members.add(memberDto);
+        }
     }
 }

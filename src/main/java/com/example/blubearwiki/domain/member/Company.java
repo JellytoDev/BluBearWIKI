@@ -21,5 +21,9 @@ public class Company {
     private String name;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.REMOVE)
-    private List<Group> groups;
+    private List<Group> groups = new ArrayList<>();
+
+    public void addGroup(Group group) {
+        this.groups.add(group);
+    }
 }

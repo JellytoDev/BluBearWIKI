@@ -2,6 +2,7 @@ package com.example.blubearwiki.controller;
 
 import com.example.blubearwiki.domain.member.Member;
 import com.example.blubearwiki.domain.wiki.Wiki;
+import com.example.blubearwiki.domain.wiki.WikiAccessType;
 import com.example.blubearwiki.domain.wiki.WikiMember;
 import com.example.blubearwiki.dto.wiki.*;
 import com.example.blubearwiki.repository.member.MemberRepository;
@@ -122,6 +123,11 @@ public class WikiRestController {
         return "wiki create";
     }
 
+    @PostMapping("/page")
+    public void paging(@RequestBody WikiPagingRequestDto) {
+
+    }
+
     @PostConstruct
     public void init() {
         Member member = new Member();
@@ -129,10 +135,14 @@ public class WikiRestController {
         member.setEmail("test@Test.com");
         memberRepository.save(member);
 
-        Wiki wiki = new Wiki();
-        wiki.setTitle("test wiki");
-        wiki.setMember(member);
-        wikiRepository.save(wiki);
+        for (int i = 0; i < 30; i++) {
+            Wiki wiki = new Wiki();
+            wiki.setTitle("wiki "+i);
+            wiki.setDescription("wiki content" + i);
+            wiki.setAccess(WikiAccessType.PUBLIC);
+            wiki.setMember(member);
+            wikiRepository.save(wiki);
+        }
 
     }
 }
