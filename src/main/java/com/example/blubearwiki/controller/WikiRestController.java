@@ -124,8 +124,14 @@ public class WikiRestController {
     }
 
     @PostMapping("/page")
-    public void paging(@RequestBody WikiPagingRequestDto) {
+    public WikiPagingResponseDto paging(@RequestBody WikiPagingRequestDto wikiPagingRequestDto) {
+        WikiPagingResponseDto wikiPagingResponseDto = new WikiPagingResponseDto();
 
+        List<Wiki> wikis = wikiRepository.findPagingAll(1, 2);
+
+        System.out.println("wikis = " + wikis);
+
+        return wikiPagingResponseDto;
     }
 
     @PostConstruct
