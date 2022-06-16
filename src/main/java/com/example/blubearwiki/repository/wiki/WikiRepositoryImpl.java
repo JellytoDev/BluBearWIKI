@@ -20,7 +20,10 @@ public class WikiRepositoryImpl extends QuerydslRepositorySupport implements Wik
 
         QWiki qWiki = QWiki.wiki;
 
+        Integer offset = (page - 1) * size;
         return from(qWiki)
+                .offset(offset)
+                .limit(size)
                 .fetch();
     }
 }

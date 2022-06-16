@@ -127,7 +127,7 @@ public class WikiRestController {
     public WikiPagingResponseDto paging(@RequestBody WikiPagingRequestDto wikiPagingRequestDto) {
         WikiPagingResponseDto wikiPagingResponseDto = new WikiPagingResponseDto();
 
-        List<Wiki> wikis = wikiRepository.findPagingAll(1, 2);
+        List<Wiki> wikis = wikiRepository.findPagingAll(1, 5);
 
         System.out.println("wikis = " + wikis);
 
