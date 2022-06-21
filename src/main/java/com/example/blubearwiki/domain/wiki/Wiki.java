@@ -3,6 +3,7 @@ package com.example.blubearwiki.domain.wiki;
 import com.example.blubearwiki.domain.member.Member;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;

@@ -16,7 +16,7 @@ public class WikiRepositoryImpl extends QuerydslRepositorySupport implements Wik
     }
 
     @Override
-    public List<Wiki> findPagingAll(Integer page, Integer size) {
+    public List<Wiki> findPagingAll(Integer page, Integer size,Long wikiCategoryId) {
 
         QWiki qWiki = QWiki.wiki;
 
@@ -24,6 +24,7 @@ public class WikiRepositoryImpl extends QuerydslRepositorySupport implements Wik
         return from(qWiki)
                 .offset(offset)
                 .limit(size)
+                .where(qWiki.wikiCategory.id.eq(wikiCategoryId))
                 .fetch();
     }
 }

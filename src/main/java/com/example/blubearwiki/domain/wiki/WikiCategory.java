@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,9 +25,10 @@ public class WikiCategory {
     Integer seq;
 
     @OneToMany(mappedBy = "wikiCategory", fetch = FetchType.LAZY)
-    List<Wiki> wikiList;
+    List<Wiki> wikiList = new ArrayList<>();
 
-    public WikiCategory() {
-
+    public void addWikiList(Wiki wiki) {
+        wikiList.add(wiki);
     }
+
 }

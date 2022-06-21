@@ -5,5 +5,5 @@ import com.example.blubearwiki.domain.wiki.Wiki;
 import java.util.List;
 
 public interface WikiRepositoryCustom {
-    List<Wiki> findPagingAll(Integer page, Integer size);
+    List<Wiki> findPagingAll(Integer page, Integer size,Long wikiCategoryId);
 }

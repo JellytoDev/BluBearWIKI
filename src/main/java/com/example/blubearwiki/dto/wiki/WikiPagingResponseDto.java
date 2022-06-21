@@ -11,5 +11,5 @@ import java.util.List;
 public class WikiPagingResponseDto {
     private Integer page;
     private Integer size;
-    private List<Wiki> wikiList;
+    private List<WikiDto> wikiList;
 }

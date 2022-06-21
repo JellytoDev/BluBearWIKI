@@ -3,9 +3,11 @@ package com.example.blubearwiki.controller;
 import com.example.blubearwiki.domain.member.Member;
 import com.example.blubearwiki.domain.wiki.Wiki;
 import com.example.blubearwiki.domain.wiki.WikiAccessType;
+import com.example.blubearwiki.domain.wiki.WikiCategory;
 import com.example.blubearwiki.domain.wiki.WikiMember;
 import com.example.blubearwiki.dto.wiki.*;
 import com.example.blubearwiki.repository.member.MemberRepository;
+import com.example.blubearwiki.repository.wiki.WikiCategoryRepository;
 import com.example.blubearwiki.repository.wiki.WikiMemberRepository;
 import com.example.blubearwiki.repository.wiki.WikiRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,7 @@ public class WikiRestController {
     private final MemberRepository memberRepository;
     private final WikiRepository wikiRepository;
     private final WikiMemberRepository wikiMemberRepository;
+    private final WikiCategoryRepository wikiCategoryRepository;
 
     Date d = new Date();
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
@@ -127,9 +130,17 @@ public class WikiRestController {
     public WikiPagingResponseDto paging(@RequestBody WikiPagingRequestDto wikiPagingRequestDto) {
         WikiPagingResponseDto wikiPagingResponseDto = new WikiPagingResponseDto();
 
-        List<Wiki> wikis = wikiRepository.findPagingAll(1, 5);
+        List<Wiki> wikis = wikiRepository.findPagingAll(wikiPagingRequestDto.getPage(),
+                wikiPagingRequestDto.getSize(),
+                wikiPagingRequestDto.getWikiCategoryId());
 
-        System.out.println("wikis = " + wikis);
+        //System.out.println("wikiPagingRequestDto = " + wikiPagingRequestDto.getWikiCategoryId());
+
+        wikiPagingResponseDto.setWikiList(WikiDto.builderListByWikiList(wikis));
+        wikiPagingResponseDto.setPage(wikiPagingRequestDto.getPage());
+        wikiPagingResponseDto.setSize(wikiPagingRequestDto.getSize());
+
+        //System.out.println("wikiPagingResponseDto = " + wikiPagingResponseDto.toString());
 
         return wikiPagingResponseDto;
     }
@@ -141,13 +152,25 @@ public class WikiRestController {
         member.setEmail("test@Test.com");
         memberRepository.save(member);
 
+        WikiCategory wikiCategory = new WikiCategory();
+        wikiCategory.setName("IncludeWikisByCategory");
+        wikiCategory.setSeq(1);
+
+        wikiCategoryRepository.save(wikiCategory);
+
+
         for (int i = 0; i < 30; i++) {
+
             Wiki wiki = new Wiki();
             wiki.setTitle("wiki "+i);
             wiki.setDescription("wiki content" + i);
             wiki.setAccess(WikiAccessType.PUBLIC);
             wiki.setMember(member);
+            wiki.setWikiCategory(wikiCategory);
+
+            wikiCategory.addWikiList(wiki);
             wikiRepository.save(wiki);
+
         }
 
     }
