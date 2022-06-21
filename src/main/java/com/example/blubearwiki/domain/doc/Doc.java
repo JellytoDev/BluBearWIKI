@@ -19,6 +19,9 @@ public class Doc {
     @Column(name = "DOC_ID")
     Long id;
 
+    @Column(name = "DOC_TITLE")
+    String title;
+
     @Column(name = "DOC_CONTENT")
     String content;
 

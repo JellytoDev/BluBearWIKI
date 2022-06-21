@@ -90,7 +90,6 @@
 
                 console.log(content);
                 console.log(typeof (content));
-                toastr.success("성공적으로 포스트가 저장되었습니다");
 
                 let title = "";
                 try {
@@ -111,44 +110,43 @@
                 let data = angular.copy($scope.data);
 
                 //=>ajax 부분
-                let {res,status} = postAPI("/rest/d/save", JSON.stringify(data));
+                let res = await postAPI("/rest/d/save", JSON.stringify(data));
 
-                console.log(res);
-                console.log(status);
+                console.log("res : ",res);
 
-                // if (res.code != 200) {
-                //     await alert("오류가 발생했습니다");
-                //     return;
-                // }
-                //
-                // if ($scope.data.id) {
-                //     toastr.success("저장되었습니다")
-                //     return
-                // }
+                if (!res.status) {
+                    toastr.error("저장에 실패하였습니다");
+                    return;
+                }
+                toastr.success("저장에 성공하였습니다");
+
             }
 
-            function postAPI(url, data) {
+            async function postAPI(url, sendData) {
 
-                let resultData;
-                let resultStatus;
+                let data;
+                let status;
 
                 // ajax 통신
-                $.ajax({
+                await $.ajax({
                     type: "POST",
                     url: url,      // 컨트롤러에서 대기중인 URL 주소이다.
-                    data: data,            // Json 형식의 데이터이다.
+                    data: sendData,            // Json 형식의 데이터이다.
                     async:false,
                     contentType: "application/json",
                     dataType: "json"
-                }).done(function (result,status) {
-                    console.log("post access success : ", result,status);
-                    resultData = result;
-                    resultStatus = status;
+                }).done(function (result) {
+                    console.log("post access success : ", result);
+                    data = result;
+                    status = true;
 
-                }).fail(function (xhr, status, errorThrown) {
-                    toastr.error("서버에 알 수 없는 오류가 발생하였습니다 : ", status);
+                }).fail(function (xhr, resultStatus, errorThrown) {
+                    toastr.error("서버에 알 수 없는 오류가 발생하였습니다 : ", resultStatus);
                 })
-                return {resultData, resultStatus};
+
+                console.log("ajax result : ",data,status)
+
+                return {data, status};
             }
 
 
