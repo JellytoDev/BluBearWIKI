@@ -1,11 +1,14 @@
 package com.example.blubearwiki.domain.wiki;
 
+import com.example.blubearwiki.domain.doc.Doc;
+import com.example.blubearwiki.domain.doc.DocCategory;
 import com.example.blubearwiki.domain.member.Member;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,7 +41,14 @@ public class Wiki {
     @OneToMany(mappedBy = "wiki", fetch = FetchType.LAZY)
     List<WikiMember> memberList;
 
-    public Wiki() {
+    @OneToMany(mappedBy = "wiki", fetch = FetchType.LAZY)
+    List<DocCategory> docCategoryList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "wiki", fetch = FetchType.LAZY)
+    List<Doc> docList;
+
+    public void addDocCategoryList(DocCategory docCategory) {
+        this.docCategoryList.add(docCategory);
     }
+
 }

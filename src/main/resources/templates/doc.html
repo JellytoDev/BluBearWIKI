@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <div th:replace="public/public_header.html :: basic_head"></div>
 
 
-    <script>
+    <script th:inline="javascript">
+
+        const wikiId = [[${docEditInfo.wikiId}]];
+        const docId =[[${docEditInfo.docId}]];
+        const docCategoryId =[[${docEditInfo.docCategoryId}]];
+
+        console.log("wiki, doc : ", wikiId, docId, docCategoryId);
+
         const container = angular.module("container-main", []);
 
         container.controller("container-controller", async ($scope,$timeout)=> {
@@ -104,6 +111,8 @@
 
                 $scope.data = {};
 
+                $scope.data.docId = docId;
+                $scope.data.wikiId = wikiId;
                 $scope.data.title = title;
                 $scope.data.content = content;
 
@@ -153,9 +162,21 @@
             console.log("Hello worlds : ");
         })
     </script>
+    <style>
+        #editor h1{
+            margin-top: 32px !important;
+            padding-bottom: 8px !important;
+            margin-bottom: 1.5rem !important;
+            border-bottom: 1px solid #dee2e6 !important;
+        }
+    </style>
 </head>
 <body>
 <div class="container-main" ng-app="container-main" ng-controller="container-controller">
+    <!--<div id="page-info">-->
+    <!--    <input type="text" th:value="${docEditInfo.docId}" id="doc-id">-->
+    <!--    <input type="text" th:value="${docEditInfo.wikiId}" id="wiki-id">-->
+    <!--</div>-->
 
     <header class="navbar navbar-expand-md navbar-light d-print-none">
         <div class="container-xl">
@@ -234,13 +255,13 @@
                     </div>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="doc-set-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="doc-set-modal" tabindex="-1" aria-labelledby="docModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
+                                <!--<div class="modal-header">-->
+                                <!--    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>-->
+                                <!--    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+                                <!--</div>-->
                                 <div class="modal-body">
                                     <div class="mb-4">
                                         <label class="form-label">Title</label>
@@ -248,10 +269,8 @@
                                     </div>
                                     <div class="mb-4">
                                         <div class="form-label">문서 카테고리</div>
-                                        <select class="form-select">
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <select class="form-select" th:each="docCategory : ${docCategoryList}">
+                                            <option th:value="${docCategory.id}" th:text="${docCategory.name}"></option>
                                         </select>
                                     </div>
                                     <div class="mb-4">

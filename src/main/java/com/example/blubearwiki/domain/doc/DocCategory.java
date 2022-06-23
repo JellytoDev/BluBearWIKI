@@ -28,6 +28,10 @@ public class DocCategory {
     @OneToMany(mappedBy = "docCategory", fetch = FetchType.LAZY)
     List<Doc> docList;
 
+    @JoinColumn(name = "WIKI_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    Wiki wiki;
+
     public DocCategory() {
 
     }

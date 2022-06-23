@@ -4,6 +4,7 @@ import com.example.blubearwiki.domain.doc.Doc;
 import com.example.blubearwiki.domain.doc.DocCategory;
 import com.example.blubearwiki.domain.doc.DocStatus;
 import com.example.blubearwiki.domain.wiki.Wiki;
+import com.example.blubearwiki.domain.wiki.WikiAccessType;
 import com.example.blubearwiki.dto.doc.DocCreateRequestDto;
 import com.example.blubearwiki.dto.doc.DocSaveRequestDto;
 import com.example.blubearwiki.repository.doc.DocCategoryRepository;
@@ -40,11 +41,12 @@ public class DocRestController {
     public ResponseEntity save(@RequestBody DocSaveRequestDto docSaveRequestDto) {
 
         log.info("save test : " + docSaveRequestDto.toString());
-
-        DocCategory docCategory = docCategoryRepository.findById(docSaveRequestDto.getDocCategoryId()).get();
         Doc doc = docRepository.findById(docSaveRequestDto.getDocId()).get();
+        if(docSaveRequestDto.getDocCategoryId()!=null){
+            DocCategory docCategory = docCategoryRepository.findById(docSaveRequestDto.getDocCategoryId()).get();
+            doc.setDocCategory(docCategory);
+        }
 
-        doc.setDocCategory(docCategory);
         doc.setTitle(docSaveRequestDto.getTitle());
         doc.setContent(docSaveRequestDto.getContent());
         doc.setUpdated(d);
@@ -80,9 +82,28 @@ public class DocRestController {
 
     @PostConstruct
     public void init() {
+
+        Wiki wiki = new Wiki();
+        wiki.setTitle("test doc wiki!");
+        wiki.setAccess(WikiAccessType.PUBLIC);
+        wiki.setDescription("this is doc test wiki");
+        wikiRepository.save(wiki);
+
+
         DocCategory docCategory = new DocCategory();
         docCategory.setName("test doc ca");
         docCategory.setSeq(1);
+        docCategory.setWiki(wiki);
+        wiki.addDocCategoryList(docCategory);
         docCategoryRepository.save(docCategory);
+
+        Doc doc = new Doc();
+        doc.setTitle("test doc");
+        doc.setStatus(DocStatus.ACTIVE);
+        doc.setUpdated(d);
+        doc.setContent("# doc test title");
+        doc.setWiki(wiki);
+        doc.setDocCategory(docCategory);
+        docRepository.save(doc);
     }
 }
