@@ -55,7 +55,6 @@ public class ViewController {
 
         DocEditInfoDto docEditInfoDto = new DocEditInfoDto();
 
-
         Long docCategoryId = docRepository.findById(docId).get().getDocCategory().getId();
 
         docEditInfoDto.setDocId(docId);

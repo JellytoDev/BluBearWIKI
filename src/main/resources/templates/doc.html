@@ -10,7 +10,7 @@
 
         const wikiId = [[${docEditInfo.wikiId}]];
         const docId =[[${docEditInfo.docId}]];
-        const docCategoryId =[[${docEditInfo.docCategoryId}]];
+        let docCategoryId =[[${docEditInfo.docCategoryId}]];
 
         console.log("wiki, doc : ", wikiId, docId, docCategoryId);
 
@@ -131,6 +131,26 @@
 
             }
 
+            $scope.setSave = async (docCategoryIdFn,docStatusFn)=>{
+                if(docStatusFn) docStatusFn = "ACTIVE";
+                else docStatusFn = "INACTIVE";
+
+                console.log("set save : ", docCategoryId, docStatusFn);
+
+                const data = {docId, docCategoryId: docCategoryIdFn, docStatus: docStatusFn};
+
+                let res = await postAPI("/rest/d/set/save", JSON.stringify(data));
+
+                console.log(res);
+
+                if (!res.status) {
+                    toastr.error("저장에 실패하였습니다");
+                    return;
+                }
+                toastr.success("저장에 성공하였습니다");
+                docCategoryId = docCategoryIdFn;
+            };
+
             async function postAPI(url, sendData) {
 
                 let data;
@@ -151,6 +171,7 @@
 
                 }).fail(function (xhr, resultStatus, errorThrown) {
                     toastr.error("서버에 알 수 없는 오류가 발생하였습니다 : ", resultStatus);
+                    status = false;
                 })
 
                 console.log("ajax result : ",data,status)
@@ -263,20 +284,20 @@
                                 <!--    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
                                 <!--</div>-->
                                 <div class="modal-body">
-                                    <div class="mb-4">
-                                        <label class="form-label">Title</label>
-                                        <input type="text" class="form-control rounded-3" name="example-text-input" placeholder="제목 입력">
-                                    </div>
+                                    <!--<div class="mb-4">-->
+                                    <!--    <label class="form-label">Title</label>-->
+                                    <!--    <input type="text" class="form-control rounded-3" name="example-text-input" placeholder="제목 입력">-->
+                                    <!--</div>-->
                                     <div class="mb-4">
                                         <div class="form-label">문서 카테고리</div>
-                                        <select class="form-select" th:each="docCategory : ${docCategoryList}">
+                                        <select class="form-select" th:each="docCategory : ${docCategoryList}" ng-model="docCategoryId">
                                             <option th:value="${docCategory.id}" th:text="${docCategory.name}"></option>
                                         </select>
                                     </div>
                                     <div class="mb-4">
                                         <div class="form-label">문서 View 설정</div>
                                         <label class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" checked="">
+                                            <input class="form-check-input" type="checkbox" checked="" ng-model="docStatus">
                                             <span class="form-check-label">문서 옆에 보이기</span>
                                         </label>
                                     </div>
@@ -284,7 +305,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                    <button type="button" class="btn btn-primary">저장</button>
+                                    <button type="button" class="btn btn-primary" ng-click="setSave(docCategoryId,docStatus)">저장</button>
                                 </div>
                             </div>
                         </div>

@@ -7,6 +7,7 @@ import com.example.blubearwiki.domain.wiki.Wiki;
 import com.example.blubearwiki.domain.wiki.WikiAccessType;
 import com.example.blubearwiki.dto.doc.DocCreateRequestDto;
 import com.example.blubearwiki.dto.doc.DocSaveRequestDto;
+import com.example.blubearwiki.dto.doc.DocSetRequestDto;
 import com.example.blubearwiki.repository.doc.DocCategoryRepository;
 import com.example.blubearwiki.repository.doc.DocRepository;
 import com.example.blubearwiki.repository.wiki.WikiRepository;
@@ -76,7 +77,23 @@ public class DocRestController {
 
         Map<String, Object> result = new HashMap<>();
         result.put("status", HttpStatus.OK);
+        return new ResponseEntity(result, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/set/save", produces = "application/json")
+    public ResponseEntity setSave(@RequestBody DocSetRequestDto docSetRequestDto) {
+
+        Map<String, Object> result = new HashMap<>();
+
+        Doc doc = docRepository.findById(docSetRequestDto.getDocId()).get();
+        DocCategory docCategory = docCategoryRepository.findById(docSetRequestDto.getDocCategoryId()).get();
+        doc.setDocCategory(docCategory);
+        doc.setStatus(docSetRequestDto.getStatus());
+        docRepository.save(doc);
+
+        result.put("status", HttpStatus.OK);
         result.put("data", "success");
+
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
